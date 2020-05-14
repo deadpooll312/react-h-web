@@ -1,8 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { inject, observer } from "mobx-react";
+// local files
+import logo from '../../logo.svg';
+import './style.scss';
 
-function App() {
+export const HomePage = inject("store")(observer(({ store }) => {
+  const { auth } = store;
+  
+  React.useEffect(() => {
+    auth.getTestData();
+  }, []);
+  
+  React.useEffect(() => {
+    console.log(auth.tasks);
+  }, [auth.tasks]);
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +33,4 @@ function App() {
       </header>
     </div>
   );
-}
-
-export default App;
+}));
