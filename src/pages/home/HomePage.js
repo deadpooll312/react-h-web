@@ -11,10 +11,6 @@ export const HomePage = inject("store")(observer(({ store }) => {
     auth.getTestData();
   }, []);
   
-  React.useEffect(() => {
-    console.log(auth.tasks);
-  }, [auth.tasks]);
-  
   return (
     <div className="App">
       <header className="App-header">
@@ -22,6 +18,12 @@ export const HomePage = inject("store")(observer(({ store }) => {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <ul>
+          {auth.tasks.map(item => {
+            return <li key={item.name}>{item.name}</li>
+          })}
+        </ul>
         <a
           className="App-link"
           href="https://reactjs.org"
